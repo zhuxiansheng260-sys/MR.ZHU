@@ -1,7 +1,12 @@
 import { GoogleGenAI, Type, Schema, Modality } from "@google/genai";
 import { Chapter, Scene, STORY_PROMPT_CONTEXT } from "../types";
 
-const apiKey = process.env.API_KEY || '';
+const apiKey = process.env.API_KEY;
+
+if (!apiKey) {
+  throw new Error("Gemini API Key is missing. Please set API_KEY in your Vercel Project Settings or local .env file.");
+}
+
 const ai = new GoogleGenAI({ apiKey });
 
 // Define schema for outline generation

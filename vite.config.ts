@@ -7,12 +7,14 @@ export default defineConfig(({ mode }) => {
   // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
   const env = loadEnv(mode, (process as any).cwd(), '');
   
+  // VITAL for Vercel: process.env.API_KEY (System Env) takes precedence over .env files
+  const apiKey = process.env.API_KEY || env.API_KEY;
+
   return {
     plugins: [react()],
     define: {
-      // This is necessary because the prompt requires using `process.env.API_KEY` specifically.
-      // Vite normally uses `import.meta.env`. This bridge allows the code to remain compliant.
-      'process.env.API_KEY': JSON.stringify(env.API_KEY)
+      // This allows the client-side code to access `process.env.API_KEY`
+      'process.env.API_KEY': JSON.stringify(apiKey)
     }
   }
 })
