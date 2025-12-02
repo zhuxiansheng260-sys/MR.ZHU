@@ -26,4 +26,18 @@ export const ChapterList: React.FC<ChapterListProps> = ({ chapters, onChapterSel
               }
             `}
           >
-            <div className="flex justify
+            <div className="flex justify-between items-start mb-2">
+                <span className="text-amber-500 font-bold font-serif-sc text-lg">第 {chapter.chapterNumber} 章</span>
+            </div>
+            <h3 className="text-slate-200 font-medium text-lg mb-2 group-hover:text-amber-200 transition-colors line-clamp-1">
+              {chapter.title}
+            </h3>
+            <p className="text-slate-400 text-sm line-clamp-2 leading-relaxed">
+              {chapter.summary}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
